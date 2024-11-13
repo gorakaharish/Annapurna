@@ -73,6 +73,7 @@ const FormsPluginsDropzone = Loadable(lazy(() => import('pages/forms/plugins/dro
 
 const ReactTableBasic = Loadable(lazy(() => import('pages/tables/react-table/basic')));
 const ReactDenseTable = Loadable(lazy(() => import('pages/tables/react-table/dense')));
+const UsersList = Loadable(lazy(() => import('pages/tables/react-table/UsersList')));
 const ReactTableSorting = Loadable(lazy(() => import('pages/tables/react-table/sorting')));
 const ReactTableFiltering = Loadable(lazy(() => import('pages/tables/react-table/filtering')));
 const ReactTableGrouping = Loadable(lazy(() => import('pages/tables/react-table/grouping')));
@@ -396,7 +397,7 @@ const MainRoutes = {
                 },
                 {
                   path: 'dense',
-                  element: <ReactDenseTable />
+                  element: <UsersList />
                 },
                 {
                   path: 'sorting',
