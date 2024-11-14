@@ -218,6 +218,6 @@ export default function UsersList() {
   );
 
   return (<>
-    <ReactTable data={data} columns={columns} includeSearchAndCsv={true} needCSV={true} />
+    <ReactTable data={data} columns={columns} includeSearch={true} needCSV={true} />
   </>);
 }

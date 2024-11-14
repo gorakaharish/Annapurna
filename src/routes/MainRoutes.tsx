@@ -147,11 +147,11 @@ const MainRoutes = {
           path: 'dashboard',
           children: [
             {
-              path: 'default',
-              element: <DashboardDefault />
+              path: 'listUsers',
+              element: <UsersList />
             },
             {
-              path: 'analytics',
+              path: 'blockedStaff',
               element: <DashboardAnalytics />
             }
           ]

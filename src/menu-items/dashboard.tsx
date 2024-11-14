@@ -30,17 +30,31 @@ const loadingMenu: NavItemType = {
       icon: icons.loading,
       children: [
         {
-          id: 'default1',
+          id: 'listUsers',
           title: 'loading',
           type: 'item',
-          url: '/dashboard/default',
+          url: '/dashboard/listUsers',
           breadcrumbs: false
         },
         {
-          id: 'analytics1',
+          id: 'blockedStaff',
           title: 'loading',
           type: 'item',
-          url: '/dashboard/analytics',
+          url: '/dashboard/blockedStaff',
+          breadcrumbs: false
+        },
+        {
+          id: 'listUsers',
+          title: 'loading',
+          type: 'item',
+          url: '/dashboard/suspendedStaff',
+          breadcrumbs: false
+        },
+        {
+          id: 'blockedStaff',
+          title: 'loading',
+          type: 'item',
+          url: '/dashboard/createUser',
           breadcrumbs: false
         }
       ]
@@ -70,7 +84,7 @@ export function MenuFromAPI() {
     }
     return list;
   };
-
+  console.log("menu: ", menu)
   const childrenList: NavItemType[] | undefined = menu?.children?.map((subList: NavItemType) => {
     return itemList(subList);
   });

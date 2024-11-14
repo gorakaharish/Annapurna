@@ -58,7 +58,7 @@ export const fuzzyFilter: FilterFn<TableDataProps> = (row, columnId, value, addM
   return itemRank.passed;
 };
 
-export default function ReactTable({ columns, data, includeSearchAndCsv, needCSV }: any) {
+export default function ReactTable({ columns, data, includeSearch, needCSV }: any) {
   const [globalFilter, setGlobalFilter] = useState('');
   const [columnFilters, setColumnFilters] = useState<any>([]);
   const matchDownSM = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
@@ -95,17 +95,21 @@ export default function ReactTable({ columns, data, includeSearchAndCsv, needCSV
     <MainCard
       title={matchDownSM ? 'Sorting' : 'Users'}
       content={false}
-      secondary={includeSearchAndCsv ?
-        (<Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" sx={{ padding: 2 }}>
+      secondary={includeSearch || needCSV ?
+        <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" sx={{ padding: 2 }}>
+          {
+            includeSearch && 
           <DebouncedInput
             value={globalFilter ?? ''}
             onFilterChange={(value) => setGlobalFilter(String(value))}
             placeholder={`Search ${data.length} records...`}
           />
+          }
+          {
+            needCSV && 
           <CSVExport {...{ data: table.getRowModel().rows.map((d) => d.original), headers, filename: 'filtering.csv' }} />
-        </Stack>) : (needCSV ? <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between" sx={{ padding: 2 }}>
-          <CSVExport {...{ data: table.getRowModel().rows.map((d) => d.original), headers, filename: 'filtering.csv' }} />
-        </Stack> : <></>)
+          }
+        </Stack> : <></>
       }
     >
 

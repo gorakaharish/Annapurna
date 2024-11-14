@@ -61,7 +61,7 @@ export default function Navigation() {
   }, [menuLoading]);
 
   const isHorizontal = menuOrientation === MenuOrientation.HORIZONTAL && !downLG;
-
+  console.log("menuItems: ", menuItems)
   const lastItem = isHorizontal ? HORIZONTAL_MAX_ITEM : null;
   let lastItemIndex = menuItems.items.length - 1;
   let remItems: NavItemType[] = [];
