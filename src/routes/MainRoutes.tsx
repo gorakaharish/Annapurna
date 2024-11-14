@@ -152,7 +152,15 @@ const MainRoutes = {
             },
             {
               path: 'blockedStaff',
-              element: <DashboardAnalytics />
+              element: <UsersList />
+            }, 
+            {
+              path: 'suspendedStaff',
+              element: <UsersList />
+            },
+            {
+              path: 'createUser',
+              element: <UsersList />
             }
           ]
         },
@@ -534,7 +542,7 @@ const MainRoutes = {
       children: [
         {
           path: 'landing',
-          element: <Landing />
+          element: <DashboardDefault />          
         }
       ]
     },

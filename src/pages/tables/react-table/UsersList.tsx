@@ -93,7 +93,7 @@ export default function UsersList() {
       actions={(row: any) => <ActionMenu row={row} />}
       includeSearch={true}
       needCSV={true}
-      pagination={'bottom'}
+      pagination={'top'}
     />
   );
 }
