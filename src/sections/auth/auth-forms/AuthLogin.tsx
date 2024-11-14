@@ -64,7 +64,7 @@ export default function AuthLogin({ forgot }: { forgot?: string }) {
             if (scriptedRef.current) {
               setStatus({ success: true });
               setSubmitting(false);
-              preload('api/menu/dashboard', fetcher); // load menu on login success
+              preload('react/dashboard', fetcher); // load menu on login success
             }
           } catch (err: any) {
             console.error(err);
