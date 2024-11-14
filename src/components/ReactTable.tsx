@@ -58,7 +58,7 @@ export const fuzzyFilter: FilterFn<TableDataProps> = (row, columnId, value, addM
   return itemRank.passed;
 };
 
-export default function ReactTable({ columns, data, includeSearch, needCSV }: any) {
+export default function ReactTable({ columns, data, includeSearch, needCSV,pagination,actions }: any) {
   const [globalFilter, setGlobalFilter] = useState('');
   const [columnFilters, setColumnFilters] = useState<any>([]);
   const matchDownSM = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
@@ -112,7 +112,22 @@ export default function ReactTable({ columns, data, includeSearch, needCSV }: an
         </Stack> : <></>
       }
     >
-
+      
+      {pagination == 'top' && <ScrollX>
+        <Stack>
+          <Box sx={{ p: 1 }}>
+            <TablePagination
+              {...{
+                setPageSize: table.setPageSize,
+                setPageIndex: table.setPageIndex,
+                getState: table.getState,
+                getPageCount: table.getPageCount
+              }}
+            />
+          </Box>
+        </Stack>
+      </ScrollX>}
+   
       <ScrollX>
         <TableContainer component={Paper}>
           <Table>
@@ -135,6 +150,7 @@ export default function ReactTable({ columns, data, includeSearch, needCSV }: an
                           header.column.columnDef.meta === undefined && {
                           className: 'cursor-pointer prevent-select'
                         })}
+                       
                       >
                         {header.isPlaceholder ? null : (
                           <Stack direction="row" spacing={1} alignItems="center">
@@ -145,30 +161,28 @@ export default function ReactTable({ columns, data, includeSearch, needCSV }: an
                       </TableCell>
                     );
                   })}
+                  {actions && <TableCell>Actions</TableCell>}
                 </TableRow>
               ))}
             </TableHead>
             <TableBody>
-              {table.getRowModel().rows.length > 0 ? (
-                table.getRowModel().rows.map((row) => (
+                {table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} {...cell.column.columnDef.meta}>
+                      <TableCell key={cell.id}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}
+                    {/* Render Actions for Each Row */}
+                    {actions && <TableCell>{actions(row.original)}</TableCell>}
                   </TableRow>
-                ))) : <TableRow>
-                <TableCell colSpan={table.getAllColumns().length}>
-                  <EmptyTable msg="No Data" />
-                </TableCell>
-              </TableRow>}
-            </TableBody>
+                ))}
+              </TableBody>
           </Table>
         </TableContainer>
       </ScrollX>
     </MainCard>
-    <MainCard>
+    {pagination == 'bottom' && <MainCard>
       <ScrollX>
         <Stack>
           <Box sx={{ p: 1 }}>
@@ -183,7 +197,8 @@ export default function ReactTable({ columns, data, includeSearch, needCSV }: an
           </Box>
         </Stack>
       </ScrollX>
-    </MainCard>
+    </MainCard>}
+    
   </>
   );
 }
