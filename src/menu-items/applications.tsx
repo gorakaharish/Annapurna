@@ -11,7 +11,7 @@ import { Add, Link1, KyberNetwork, Messages2, Calendar1, Kanban, Profile2User, B
 // type
 import { NavItemType } from 'types/menu';
 
-// icons
+// icons   
 const icons = {
   applications: KyberNetwork,
   chat: Messages2,
